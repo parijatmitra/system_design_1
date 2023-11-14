@@ -1,0 +1,38 @@
+Major reason for failure
+
+The asynchronous nature of the network in a distributed system can make it very hard for us to differentiate between a crashed node and a node that is just really slow to respond to requests.
+
+Mechanism to detect failure
+
+Timeouts is the main mechanism we can use to detect failures in distributed systems. Since an asynchronous network can infinitely delay messages, timeouts impose an artificial upper bound on these delays. As a result, we can assume that a node fails when it is slower than this bound. This is useful because otherwise, the assumption that the nodes are extremely slow would block the system that is waiting for the nodes that crashed.
+
+Trade-off for the small timeout value
+
+If we select a smaller value for the timeout, our system will waste less time waiting for the nodes that have crashed.
+At the same time, the system might declare some nodes that have not crashed dead, while they are actually just a bit slower than expected.
+
+Trade-off for the large timeout value
+
+If we select a larger value for the timeout, the system will be more lenient with slow nodes.
+At the same time, the system will be slower in identifying crashed nodes, in some cases wasting time while waiting for them.
+
+Failure detector
+
+A failure detector is the component of a node that we can use to identify other nodes that have failed.
+
+Properties that categorize failure detectors
+
+Completeness
+
+Completeness corresponds to the percentage of crashed nodes a failure detector successfully identifies in a certain period.
+
+Accuracy
+
+Accuracy corresponds to the number of mistakes a failure detector makes in a certain period.
+
+A perfect failure detector
+
+A perfect failure detector is the one with the strongest form of completeness and accuracy. That is, it is one that successfully detects every faulty process without ever assuming a node has crashed before it actually does.
+
+As expected, it is impossible to build a perfect failure detector in purely asynchronous systems. Still, we can even use imperfect failure detectors to solve difficult problem
+
