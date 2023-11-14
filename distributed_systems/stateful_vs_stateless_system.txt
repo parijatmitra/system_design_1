@@ -1,0 +1,47 @@
+Stateless Systems
+
+A stateless system or protocol does not keep track of any state information between requests. 
+Each request is treated as an independent transaction, unrelated to any previous requests.
+
+Characteristics of Stateless Systems:
+No Memory of Past Interactions: The system does not remember previous interactions. Each transaction is processed from scratch.
+
+Simplicity: Stateless architectures are simpler to design and understand, as there is no need to keep track of the state.
+
+Scalability: They can be more scalable, as there is no need to maintain state information between requests. This makes it easier to distribute the load across multiple servers.
+
+Examples:
+HTTP, the protocol underlying the World Wide Web, is inherently stateless.
+RESTful web services are typically stateless.
+Stateless components in UI development, where each rendering of the component is independent of the previous one.
+Downsides:
+More Overhead Per Request: Since no state is maintained, all relevant data must be sent with each request.
+Less Personalization: It's harder to personalize the experience without a memory of past interactions.
+
+
+Stateful Systems
+
+A stateful system, in contrast, maintains state information across requests. It can remember, track, and manage the state of an interaction over time.
+
+Characteristics of Stateful Systems:
+
+Memory of Past Interactions: The system remembers past states and interactions, allowing for more complex operations based on history.
+
+State Management: These systems need a way to store and retrieve state, which can add complexity to the system's design.
+
+Personalization and Continuity: They can offer a more personalized experience and maintain continuity over a session or interaction.
+
+Examples:
+TCP (Transmission Control Protocol) is a stateful protocol where a connection is established and maintained until the application finishes exchanging messages.
+Web applications that require user login and maintain user sessions.
+Stateful components in UI development, where the component keeps track of changes over time.
+Downsides:
+Complexity: Managing state adds complexity to system design and implementation.
+Scalability Challenges: Maintaining state can impact scalability, as it might require additional resources and more sophisticated load-balancing solutions.
+Potential for Resource Leaks: Poorly managed state can lead to resource leaks, where memory or other resources are not freed correctly.
+
+Choosing Between Stateless and Stateful
+
+The choice between stateless and stateful depends on the specific requirements of the system being designed. Stateless systems are often chosen for their simplicity and scalability, especially in systems where each request can be processed independently. Stateful systems are chosen when continuity, context, or complex interactions over time are required.
+
+
