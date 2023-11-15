@@ -1,0 +1,50 @@
+Partitioning
+
+We can make our system scalable by partitioning.
+
+Scalability
+
+Scalability lets us store and process datasets much larger than what we could with a single machine.
+
+Mechanism to achieve scalability
+
+One of the primary mechanisms of achieving scalability is partitioning.
+
+Partitioning
+
+Partitioning is the process of splitting a dataset into multiple, 
+smaller datasets, and then assigning the responsibility of storing and processing them to different nodes of a distributed system. 
+This allows us to add more nodes to our system and increase the size of the data it can handle.
+
+There are two different variations of partitioning:
+
+1.)Vertical partitioning
+2.)Horizontal partitioning (or sharding)
+
+Vertical partitioning: Splitting on the basis of columns.
+Horizontal partitioning: Splitting on the basis of rows.
+
+The splitted datasets will be on different nodes of the distributed system.
+
+Vertical partitioning
+
+Splitting on the basis of columns ( read join operation in databases)
+
+Normalization is one way to perform vertical partitioning. 
+However, general vertical partitioning goes far beyond that: it splits a column, even when they are normalized.
+
+Horizontal partitioning
+
+Splitting on the basis of rows 
+One approach to split : alphabatically based on names;
+The above approach's problem: Difficult to range query as we have to access data from different nodes.
+
+Limitations of partitioning
+
+Need to access data from different nodes of the distributed system where the data is located
+Another important implication of horizontal partitioning is the potential for loss of transactional semantics.
+
+Vertical partitioning is mainly a data modeling practice, which can be performed by the engineers designing a system—sometimes independently of the storage systems used.
+However, horizontal partitioning is a common feature of distributed databases. 
+So, to use these systems properly, engineers need to know how the system works under the hood.
+
