@@ -1,0 +1,33 @@
+The technique we use to achieve availability is replication.
+
+Availability
+
+Availability refers to the ability of the system to remain functional despite failures in parts of it.
+
+Mechanism to achieve availability
+
+The technique we use to achieve availability is replication.
+
+Replication
+
+Replication is the main technique used in distributed systems to increase availability. 
+It consists of storing the same piece of data in multiple nodes (called replicas) so that if one of them crashes, 
+data is not lost, and requests can be served from the other nodes in the meanwhile.
+
+These copies must be maintained and kept in sync with each other on every update.
+
+
+There are two main strategies for replication:
+
+Pessimistic replication
+Optimistic replication
+
+Pessimistic replication
+
+Pessimistic replication tries to guarantee from the beginning that all the replicas are identical to each other 
+as if there was only one copy of the data all along.
+
+Optimistic replication
+
+Optimistic replication, or lazy replication, allows the different replicas to diverge. 
+This guarantees that they will converge again if the system does not receive any updates, or enters a quiesced state, for a period of time.
