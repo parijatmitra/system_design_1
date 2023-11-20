@@ -1,0 +1,65 @@
+Single-master replication
+
+Single-master replication is a technique where we designate a single node amongst the replicas as the leader, or primary, that receives all the updates.
+This technique is also known as primary-backup replication.
+
+We commonly refer to the remaining replicas as followers or secondaries. 
+These can only handle read requests. Every time the leader receives an update, it executes it locally and also propagates the update to the other nodes. 
+This ensures that all the replicas maintain a consistent view of the data.
+
+Techniques for propagating updates
+There are two ways to propagate the updates: synchronously and asynchronously.
+
+Synchronous replication
+
+In synchronous replication, the node replies to the client to indicate the update is complete—only after receiving acknowledgments from the other replicas that they’ve also performed the update on their local storage.
+This guarantees that the client is able to view the update in a subsequent read after acknowledging it, no matter which replica the client reads from.
+
+Furthermore, synchronous replication provides increased durability. This is because the update is not lost even if the leader crashes right after it acknowledges the update.
+
+However, this technique can make writing requests slower. 
+This is because the leader has to wait until it receives responses from all the replicas.
+
+Asynchronous replication
+
+
+In asynchronous replication, the node replies to the client as soon as it performs the update in its local storage, without waiting for responses from the other replicas.
+This technique increases performance significantly for write requests. This is because the client no longer pays the penalty of the network requests to the other replicas.
+
+However, this comes at the cost of reduced consistency and decreased durability. 
+After a client receives a response for an update request, the client might read older (stale) values in a subsequent read. 
+This is only possible if the operation happens in one of the replicas that have not yet performed the update.
+Moreover, if the leader node crashes right after it acknowledges an update, and the propagation requests to the other replicas are lost, any acknowledged update is eventually lost.
+
+
+Advantages of single-master replication
+
+1.)It is simple to understand and implement
+2.)Concurrent operations serialized in the leader node, remove the need for more complicated, distributed concurrency protocols. 
+In general, this property also makes it easier to support transactional operations
+3.)It is scalable for read-heavy workloads, because the capacity for reading requests can be increased by adding more read replicas.
+
+Disadvantages of single-master replication
+
+1.)It is not very scalable for write-heavy workloads, because a single node (the leader)’s capacity determines the capacity for writes
+2.)It imposes an obvious trade-off between performance, durability, and consistency
+3.)Scaling the read capacity by adding more follower nodes can create a bottleneck in the network bandwidth of the leader node, if there’s a large number of followers listening for updates
+4.)The process of failing over to a follower node when the leader node crashes, is not instant. This may create some downtime and also introduce the risk of errors.
+
+
+Failover
+Failover is when the leader node crashes and a follower node takes over.
+
+In general, there are two approaches to perform a failover: manual and automated.
+
+
+Manual approach
+
+In the manual approach, the operator selects the new leader node and instructs all the nodes accordingly. 
+This is the safest approach, but it incurs significant downtime.
+
+Automated approach
+
+An alternative is an automated approach, where follower nodes detect that the leader node has crashed (e.g., via periodic heartbeats), and attempt to elect a new leader node. This is faster but is quite risky. 
+This is because there are many different ways in which the nodes can get confused and arrive at an incorrect state.
+
