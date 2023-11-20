@@ -1,0 +1,37 @@
+Multi-Master Replication Algorithm
+
+Single-master replication has some limitations in terms of performance, scalability, and availability.
+there are many applications where availability and performance are much more important than data consistency or transactional semantics.
+Multi-master replication is an alternative replication technique that favors higher availability and performance over data consistency.
+
+This technique is also known as multi-primary replication.
+
+In this technique, all replicas are equal and can accept write requests. 
+They are also responsible for propagating the data modifications to the rest of the group.
+
+Nodes might disagree on what is the right order for some requests. We usually refer to this as a conflict.
+
+
+
+Conflict resolution
+
+An important aspect of different approaches to resolving conflicts is whether they do it eagerly or lazily.
+
+In the eagerly case, the conflict is resolved during the write operation.
+
+In the lazily case, the write operation proceeds to maintain multiple, alternative versions of the data record that are eventually resolved to a single version later on, i.e., during a subsequent read operation.
+
+Approaches to conflict resolution
+
+Exposing conflict resolution to the clients
+- Client selects which data to prefer in case of Conflict
+
+Last-write-wins conflict resolution
+-Each node in the system tags each version with a timestamp, using a local clock. During a conflict, the version with the latest timestamp is selected.
+
+Causality tracking algorithms
+-The system uses an algorithm that keeps track of causal relationships between different requests. 
+When there is a conflict between two writes (A, B) and one is determined to be the cause of the other one (suppose A is the cause of B), then the resulting write (B) is retained.
+
+However, there can still be writes that are not causally related, i.e., requests are actually concurrent. 
+In such cases, the system cannot make an easy decision.
