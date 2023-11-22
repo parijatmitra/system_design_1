@@ -1,0 +1,11 @@
+let's explore the properties that guarantee safety in distributed systems, and their relation with difficulties in designing distributed systems.
+
+Property           Property which is harming that property
+
+Atomicity          Partial failures
+Consistency        Network asynchrony
+Isolation          Concurrency
+
+Partial failures reduce atomicity.
+Network asynchrony reduces consistency.
+Concurrency reduces isolation.
