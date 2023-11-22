@@ -1,0 +1,29 @@
+Quorums in Distributed Systems
+
+concept of quorums  how they solve low availability problems in synchronous replication.
+
+The problem in synchronous replication
+-Availability is quite low for write operations, because the failure of a single node makes the system unable to process writes until the node recovers.
+
+Quorums
+
+A past paper introduced this technique as a quorum-based voting protocol for replica control.
+
+In general, in a system that has a total of 
+V replicas, every read operation should obtain a read quorum of 
+Vr replicas. Meanwhile, a write operation should obtain a write quorum of 
+Vw replicas. The values of these quorums should obey the following properties:
+
+Vr + Vw > V --Important
+Vw > V/2 --Important
+
+The first rule ensures that a data item is not read and written by two operations concurrently.
+
+The second rule ensures that at least one node receives both of the two write operations and imposes an order on them. 
+This means that two write operations from two different operations cannot occur concurrently on the same data item.
+
+Both of the rules together guarantee that the associated distributed database behaves as a centralized, one-replica database system.
+
+The concept of a quorum is really useful in distributed systems that have multiple nodes.
+
+The concept of a quorum is used extensively in other areas, like distributed transactions or consensus protocols.
