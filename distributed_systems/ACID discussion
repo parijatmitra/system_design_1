@@ -1,0 +1,29 @@
+Atomicity: Multiple operations are treated as a single unit.
+The unit can be a success or a failure. There is nothing in between. I.e. either all operations are success or all are failures. No partial number of successes or failures.
+
+For distributed systems, it data is updated, it gets update to all nodes (replicas) or to no nodes.
+
+Consistency (in case of database):  A transaction only transitions the database from one valid to another valid state while respecting the database invariants.
+
+However, these invariants are application-specific and defined by every application accordingly.
+
+For example, consider an application that has a table A with records that refer to records in table B through a foreign key relationship. The database prevents a transaction from deleting a record from table A, unless any records in table B referenced from this record are already deleted.
+
+Consistency (in case of database) : Every successful read request will receive the result of the most recent write request.
+
+If someone asks about consistency in the case of ACID, then reply with the consistency of ACID.
+Otherwise, it’s better to always prefer the consistency of distributed systems.
+
+
+Isolation: When multiple operations are done/running at the same time and potentially on the same data, it looks from outside that only one operation is done/running at any time and there is no interference among them.
+
+Isolation prevents a large number of anomalies.
+
+Durability: Once a data is updated, it remains updated even after failures.
+
+Durability guarantees that once a transaction is committed, it remains committed even in the case of failure.
+
+In the context of single-node, centralised systems, this usually means that completed transactions and their effects are recorded in non-volatile storage.
+
+In the context of distributed systems, this means that transactions need to be durably stored in multiple nodes. This way, recovery is possible even in the presence of total failures of a node, alongside its storage facilities.
+
