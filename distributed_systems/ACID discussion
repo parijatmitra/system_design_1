@@ -11,7 +11,8 @@ A transaction only transitions the database from one valid to another valid stat
 
 However, these invariants are application-specific and defined by every application accordingly.
 
-For example, consider an application that has a table A with records that refer to records in table B through a foreign key relationship. The database prevents a transaction from deleting a record from table A, unless any records in table B referenced from this record are already deleted.
+For example, consider an application that has a table A with records that refer to records in table B through a foreign key relationship. 
+The database prevents a transaction from deleting a record from table A, unless any records in table B referenced from this record are already deleted.
 
 Consistency (in case of database) :
 
