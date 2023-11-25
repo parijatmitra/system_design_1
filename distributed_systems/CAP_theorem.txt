@@ -1,0 +1,45 @@
+Network partision
+- If there is any problem with communication among nodes in distributed system, we say that we have a network partision.
+
+Availability
+
+Availability means that every request receives a non-error response, without any guarantees on whether it reflects the most recent write request.
+
+Consistency
+
+Consistency means that every successful read request receives the result of the most recent write request.
+
+
+CAP theorem
+
+According to the final statement of the CAP theorem, a distributed system can be either consistent or available in the presence of a network partition.
+
+Importance of CAP theorem
+
+The CAP theorem forces designers of distributed systems to make explicit trade-offs between availability and consistency. 
+Once the engineers become aware of these properties, they choose the appropriate system.
+
+Trade-off between latency and consistency
+
+When no network partition is present during normal operation, there’s a different trade-off between latency and consistency.
+
+An example of this trade-off is the single-master replication scheme. In this setting, the synchronous replication approach would favor consistency over latency. Meanwhile, asynchronous replication would reduce latency at the cost of consistency.
+
+PACELC theorem
+
+In the case of a network partition (P), the system has to choose between availability (A) and consistency (C) but else (E), 
+when the system operates normally in the absence of network partitions, 
+the system has to choose between latency (L) and consistency (C).
+
+These sub-categories are combined to form the following four categories:
+
+AP/EL
+CP/EL
+AP/EC
+CP/EC
+
+A system from the AP/EL category prioritizes availability during a network partition and latency during a normal operation.
+
+There are still systems we cannot strictly classify into these categories. 
+This is because they have various levers that can tune the system differently when needed. 
+Still, this theorem serves as a good indicator of the various forces at play in a distributed system.
