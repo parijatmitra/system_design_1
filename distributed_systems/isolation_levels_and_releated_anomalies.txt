@@ -1,0 +1,47 @@
+Isolation levels:
+ In case of isolation, there is still a need for some formal models that define what is possible and what is not in a system’s behavior. These are called isolation levels.
+
+ Most common isolation models:
+ Serializability:  It essentially states that two transactions, when executed concurrently, should give the same result as though executed sequentially.
+
+ Repeatable read: It ensures that the data once read by a transaction will not change throughout its course.
+
+ Snapshot isolation:  It guarantees that all reads made in a transaction see a consistent snapshot of the database from the point it started and till the transaction commits successfully if no other transaction has updated the same data since that snapshot.
+
+ Read committed: It does not allow transactions to read data that has not yet been committed by another transaction.
+
+ Read uncommitted: It is the lowest isolation level and allows the transaction to read uncommitted data by other transactions.
+
+
+ Anomalies
+
+
+ Dirty writes: 
+ A dirty write occurs when a transaction overwrites a value that was previously written by another transaction that is still in-flight and has not been committed yet.
+
+ Dirty read: 
+ A dirty read occurs when a transaction reads a value that has been written by another transaction that has not yet been committed.
+
+ Fuzzy or non-repeatable read: 
+ A fuzzy or non-repeatable read occurs when a value is retrieved twice during a transaction (without it being updated in the same transaction), and the value is different.
+
+ Phantom read:
+ A phantom read occurs when a transaction does a predicate-based read, and another transaction writes or removes a data item matched by that predicate while the first transaction is still in flight. If that happens, then the first transaction might be acting again on stale data or inconsistent data.
+
+ Clear brief about phantom read: When we have a read request, before the completion of the read request (retrieval of the data), we update the same data, then the read request will give wrong results/values of the data as though it was in during the instanciation of the read request.
+
+ Ex: For example, transaction A runs 2 queries to calculate the maximum and the average age of a specific set of employees. However, between the two queries, transaction B is interleaved and inserts a lot of old employees in this set, thus making transaction A return an average that is larger than the maximum.
+
+ Allowing phantom reads can be safe for an application that does not make use of predicate-based reads, i.e., performs only the reads that select records using a primary key.
+
+ Lost update:
+ A lost update occurs when two transactions read the same value and then try to update it to two different values. The end result is that one of the two updates survives, but the process executing the other update is not informed that its update did not take effect. Thus it is called a lost update.
+
+
+ Read skew:
+ A read skew occurs when there are integrity constraints between two data items that seem to be violated because a transaction can only see partial results of another transaction.
+
+ Write skew
+ A write skew occurs when two transactions read the same data, but then modify disjoint sets of data.
+
+ 
